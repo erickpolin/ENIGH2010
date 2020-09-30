@@ -17,8 +17,6 @@ Conc<-Conc%>%
   select(folioviv,foliohog,tot_resi,ingcor,ingtrab,trabajo,negocio,otros_trab,rentas,utilidad,
          arrenda,transfer,jubila,beca,donativo,remesa,bene_gob,esp_hog,esp_inst,esti,otros,factor,upm,est_dis)
 
-Conc$folioviv<-as.numeric(Conc$folioviv)
-
 names(Conc)<- c("folioviv", "foliohog","tot_integ", "ing_cor", "ingtrab", "trabajo", "negocio", "otros_trab", "rentas", "utilidad",
                  "arrenda", "transfer", "jubilacion", "becas", "donativos", "remesas", "bene_gob", "transf_hog", "trans_inst",
                  "estim_alqu", "otros_ing","factor","upm","est_dis")
@@ -57,7 +55,7 @@ Conc<-merge(Conc,HogaresIndigenas,by=c("folioviv","foliohog"))
 
 #the fist two digits of "folioviv" makes reference to the state
 #Let?s create a variable called entidad that contains thos two first digits of the "folioviv" variable
-Conc$entidad<-substr(Conc$folioviv,1,2)
+Conc$entidad<-substr(Conc$folioviv,1,2) #### aquí
 
 ############vamos a deflactar#################
 Deflactor_2010<-read.csv(choose.files())
