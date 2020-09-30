@@ -55,12 +55,19 @@ Conc<-merge(Conc,HogaresIndigenas,by=c("folioviv","foliohog"))
 
 #the fist two digits of "folioviv" makes reference to the state
 #Let?s create a variable called entidad that contains thos two first digits of the "folioviv" variable
-Conc$entidad<-substr(Conc$folioviv,1,2) #### aquí
+
+Conc$folioviv<-as.numeric(Conc$folioviv)
+
+Conc<-Conc%>%
+  mutate(entidad=ifelse(folioviv<99999,substr(folioviv,1,1),substr(folioviv,1,2)))
+
+Conc$entidad<-as.numeric(Conc$entidad)
+
 
 ############vamos a deflactar#################
 Deflactor_2010<-read.csv(choose.files())
 
-names(Deflactor_2010)<-c("entidad","nombre_entidad","deflactor")
+names(Deflactor_2010)<-c("entidad","nombre_entidad","Deflactores")
 
 Conc<-merge(Conc,Deflactor_2010,by=c("entidad"))
 
@@ -140,5 +147,5 @@ for(i in 1:9)
 Conc[Conc$DECIL%in%"0",]$DECIL<-10
 
 
-write.dbf(Conc,file="Conc.dbf")
+write.dbf(Conc,file="Conc2010.dbf")
 
