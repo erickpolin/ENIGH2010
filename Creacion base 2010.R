@@ -146,6 +146,10 @@ for(i in 1:9)
 # a lo que le qued? cero (que es la ?ltima observaci?n), ponle el decil 10
 Conc[Conc$DECIL%in%"0",]$DECIL<-10
 
+Conc<-Conc%>%
+  mutate(Small=ifelse(tam_loc>2,1,0))
+
+
 
 write.dbf(Conc,file="Conc2010.dbf")
 
