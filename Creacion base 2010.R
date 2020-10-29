@@ -15,11 +15,11 @@ Conc<-read.dbf("NCV_Concentrado_2010_concil_2010_DBF.dbf",as.is = T)
 #Keeping Variables of interest
 Conc<-Conc%>%
   select(folioviv,foliohog,tot_resi,ingcor,ingtrab,trabajo,negocio,otros_trab,rentas,utilidad,
-         arrenda,transfer,jubila,beca,donativo,remesa,bene_gob,esp_hog,esp_inst,esti,otros,factor,upm,est_dis)
+         arrenda,transfer,jubila,beca,donativo,remesa,bene_gob,esp_hog,esp_inst,esti,otros,factor,upm,est_dis,tam_loc)
 
 names(Conc)<- c("folioviv", "foliohog","tot_integ", "ing_cor", "ingtrab", "trabajo", "negocio", "otros_trab", "rentas", "utilidad",
                  "arrenda", "transfer", "jubilacion", "becas", "donativos", "remesas", "bene_gob", "transf_hog", "trans_inst",
-                 "estim_alqu", "otros_ing","factor","upm","est_dis")
+                 "estim_alqu", "otros_ing","factor","upm","est_dis","tam_loc")
 
 ################ DEfinir hogares in?genas#################
 Poblacion<-read.dbf("NCV_Poblacion_2010_concil_2010_DBF.dbf",as.is = T)
