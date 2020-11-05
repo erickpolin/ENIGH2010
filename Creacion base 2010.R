@@ -147,7 +147,7 @@ for(i in 1:9)
 Conc[Conc$DECIL%in%"0",]$DECIL<-10
 
 Conc<-Conc%>%
-  mutate(Small=ifelse(tam_loc>2,1,0))
+  mutate(Small=ifelse(tam_loc==4,1,0))
 
 
 
