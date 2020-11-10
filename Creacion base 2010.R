@@ -21,6 +21,10 @@ names(Conc)<- c("folioviv", "foliohog","tot_integ", "ing_cor", "ingtrab", "traba
                  "arrenda", "transfer", "jubilacion", "becas", "donativos", "remesas", "bene_gob", "transf_hog", "trans_inst",
                  "estim_alqu", "otros_ing","factor","upm","est_dis","tam_loc")
 
+Conc<-Conc%>%
+  mutate(Small=ifelse(tam_loc==4,1,0))
+
+
 ################ DEfinir hogares in?genas#################
 Poblacion<-read.dbf("NCV_Poblacion_2010_concil_2010_DBF.dbf",as.is = T)
 
@@ -63,11 +67,26 @@ Conc<-Conc%>%
 
 Conc$entidad<-as.numeric(Conc$entidad)
 
+summary(Conc$entidad)
+
 
 ############vamos a deflactar#################
-Deflactor_2010<-read.csv(choose.files())
+entidad<-c("1","2","3","4","5","6","7","8","9",
+           "10","11","12","13","14","15","16","17","18","19","20",
+           "21","22","23","24","25","26","27","28","29","30","31","32")
 
-names(Deflactor_2010)<-c("entidad","nombre_entidad","Deflactores")
+Deflactores<-c(74.47423155,74.27424964,76.64073005,72.07600445,74.7770528,73.50177598,71.51590513,
+               75.65625486,71.63136432,71.40512455,71.73113624,72.43926373,70.3729947,72.41898051,
+               71.9774887,71.87229217,74.85584543,73.11060425,76.49423725,73.61796506,72.41556468,
+               71.02683439,76.24426196,73.49222269,77.8498841,76.10684879,73.54715857,76.14221348,
+               71.90667063,73.09217084,72.98545756,72.83828721)
+
+entidades<-c("Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila de Zaragoza",
+             "Colima","Chiapas","Chihuahua","Ciudad de MÃ©xico","Durango","Guanajuato","Guerrero","Hidalgo",
+             "Jalisco","MÃ©xico","MichoacÃ¡n de Ocampo","Morelos","Nayarit","Nuevo LeÃ³n","Oaxaca","Puebla",
+             "QuerÃ©taro","Quintana Roo","San Luis PotosÃ","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz de Ignacio de la Llave","YucatÃ¡n","Zacatecas")
+
+Deflactor_2010<-data.frame(entidad,entidades,Deflactores)
 
 Conc<-merge(Conc,Deflactor_2010,by=c("entidad"))
 
@@ -146,8 +165,6 @@ for(i in 1:9)
 # a lo que le qued? cero (que es la ?ltima observaci?n), ponle el decil 10
 Conc[Conc$DECIL%in%"0",]$DECIL<-10
 
-Conc<-Conc%>%
-  mutate(Small=ifelse(tam_loc==4,1,0))
 
 
 
