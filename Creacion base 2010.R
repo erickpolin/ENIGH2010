@@ -1,4 +1,4 @@
-###################  Creacion de la base 2018 #####################
+###################  Creacion de la base 2010 #####################
 
 #ENIGH 2010
 library(foreign)
@@ -238,7 +238,7 @@ Conc2010<-read.dbf("Conc2010.dbf",as.is = T)
 names(Conc2010)<-c("ENTIDAD","FOLIOVIV","FOLIOHOG","GASTO","TOT_INTEG","INGCOR","INGTRAB","TRABAJO","NEGOCIO","OTROS_TRAB",
                    "RENTAS","UTILIDAD","ARRENDA","TRANSFER","JUBILA","BECA","DONATIVO","REMESA","BENE_GOB",
                    "ESP_HOG","ESP_INST","ESTI","OTROS","FACTOR","UPM","EST_DIS","tam_localidad","Small","HOGARINDIG","NOMBRE_ENT",
-                   "DEFLACTORES","Nhog","TAM_DECIL","MAXT","ACUMULA","ACUMULA2","DECIL")
+                   "DEFLACTORES","Nhog","TAM_DECIL","MAXT","ACUMULA","ACUMULA2","DECIL","Bottom_40")
 
 mydesign <- svydesign(id=~UPM,strata=~EST_DIS,data=Conc2010,weights=~FACTOR)
 
