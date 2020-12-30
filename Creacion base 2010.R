@@ -215,7 +215,7 @@ round(prom_rub)
 round(a,5)
 
 Conc<-Conc%>%
-  mutate(bottom_40=ifelse(DECIL==1,1,0))
+  mutate(bottom_40=ifelse(DECIL<5,1,0))
 
 
 write.dbf(Conc,file="Conc2010.dbf")
