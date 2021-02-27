@@ -681,19 +681,34 @@ prueba<-c_DECIL_ES%>%
 
 all.equal(prueba$`ING COR2010`,prueba$prueba)
 
+########## consumo ###########
+
+
+
 Consumo_por_DECIL <- svyby(~GASTO,denominator=~Nhog,by=~DECIL,mydesign,svyratio)
 
 Consumo_promedio <- svyratio(~GASTO,denominator=~Nhog,mydesign) 
+
+SE_consumo_Tot <- SE (Consumo_promedio)
+SE_consumo_DECIL <- SE (Consumo_por_DECIL)
 
 Consumo_por_DECIL <- Consumo_por_DECIL[[2]] 
 Consumo_promedio <- Consumo_promedio[[1]]
 
 Consumo<-data.frame(c(Consumo_promedio,Consumo_por_DECIL))
 
+DECILES<-c("PROMEDIO", "I", "II", "III","IV", "V", "VI", "VII", "VIII", "IX","X")
 row.names(Consumo)<-DECILES
+
+Consumo_SE<-data.frame(c(SE_consumo_Tot,SE_consumo_DECIL))
+row.names(Consumo_SE)<-DECILES
+
+
+
 
 
 write.dbf(Consumo,file = "Nacional Consumo  por DECIL 2010.dbf")
+write.dbf(Consumo_SE,file="Nacional Consumo  por DECIL 2010 SE.dbf")
 write.dbf(c_DECIL_ES,file = "Nacional por fuente por DECIL estimaciones 2010.dbf")
 write.dbf(c_DECIL_SE,file = "Nacional por fuente por DECIL errores standard 2010.dbf")
 write.dbf(c_DECIL_CV,file = "Nacional por fuente por DECIL CV 2010.dbf")
